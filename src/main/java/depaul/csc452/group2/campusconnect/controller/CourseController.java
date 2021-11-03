@@ -1,9 +1,7 @@
 package depaul.csc452.group2.campusconnect.controller;
 
 import depaul.csc452.group2.campusconnect.model.Course;
-import depaul.csc452.group2.campusconnect.model.Student;
 import depaul.csc452.group2.campusconnect.service.ICourseService;
-import depaul.csc452.group2.campusconnect.service.IStudentService;
 
 import javax.validation.Valid;
 
@@ -13,9 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -43,7 +39,7 @@ public class CourseController {
         }
 
         courseService.update(course);
-        // model.addAttribute("courses", courseService.findAll());
+        model.addAttribute("courses", courseService.findAll());
         return "redirect:/courses";
     }
 }

@@ -21,19 +21,3 @@ CREATE TABLE students (
     course_id int,
     FOREIGN KEY (course_id) REFERENCES courses(id)
 );
-
-
-
-
--- CREATE TABLE course_students (
---     id serial PRIMARY KEY,
---     course_id int,
---     students_id int
--- );
-
--- CREATE TABLE student_enrollment (
---                                     studentID VARCHAR(50),
---                                     courseID VARCHAR(50),
---                                     enrolled_period varchar(50),
---                                     PRIMARY KEY (studentID, courseID)
--- );
