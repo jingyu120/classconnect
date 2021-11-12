@@ -1,23 +1,21 @@
 package depaul.csc452.group2.campusconnect.controller;
 
 import depaul.csc452.group2.campusconnect.model.Student;
-import depaul.csc452.group2.campusconnect.service.IStudentService;
 import depaul.csc452.group2.campusconnect.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-@RestController
+@Controller
 @RequestMapping(path = "students")
 public class StudentController {
     @Autowired
-    private IStudentService studentService;
+    private StudentService studentService;
 
     @GetMapping
     public ModelAndView showStudents() {
@@ -26,15 +24,14 @@ public class StudentController {
         return mv;
     }
 
-    @GetMapping("demo")
-    public List<Student> showDemo() {
-        List<Student> students = Arrays.asList(
-            new Student(),
-            new Student(),
-            new Student(),
-            new Student(),
-            new Student()
-        );
-        return students;
+    @GetMapping("/add")
+    public String viewAddStudent(Student student) {
+        return "addStudent";
+    }
+
+    @PostMapping
+    public String addStudent(Student student) {
+        studentService.addStudent(student);
+        return "redirect:/students";
     }
 }

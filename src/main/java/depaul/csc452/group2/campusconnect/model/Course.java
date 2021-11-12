@@ -1,4 +1,5 @@
 package depaul.csc452.group2.campusconnect.model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -15,7 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 import lombok.Data;
 import lombok.ToString;
 
@@ -28,27 +28,22 @@ public class Course {
     private long id;
     private String dept;
     private int num;
-    @Column(name="nm")
+    @Column(name = "nm")
     private String name;
     private String descrip;
 
-    @ManyToMany(cascade = CascadeType.ALL )
-    @JoinTable(name = "student_course",
-                    joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
-                    inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "student_course", joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
     @ToString.Exclude
     private Set<Student> students;
-    
-
-
 
     // public void addStudent(Student student) {
-    //     students.add(student);
-    //     student.setCourses(this);
+    // students.add(student);
+    // student.setCourses(this);
     // }
- 
+
     // public void removeStudent(Student student) {
-    //     students.remove(student);
-    //     student.setCourses(null);
+    // students.remove(student);
+    // student.setCourses(null);
     // }
 }
