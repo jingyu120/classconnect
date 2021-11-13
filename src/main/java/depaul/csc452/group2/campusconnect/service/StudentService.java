@@ -18,10 +18,6 @@ public class StudentService {
 
     @Autowired
     private UserRepository userRepository;
-    // public StudentService(StudentRepository studentRepository) {
-    // this.studentRepository = studentRepository;
-
-    // }
 
     public List<Student> findAll() {
         return studentRepository.findAll();
