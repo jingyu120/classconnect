@@ -1,3 +1,5 @@
+drop table if exists student_course;
+
 DROP TABLE IF EXISTS students;
 
 DROP TABLE IF EXISTS courses;
