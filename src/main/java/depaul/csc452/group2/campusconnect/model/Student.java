@@ -1,15 +1,12 @@
 package depaul.csc452.group2.campusconnect.model;
 
-import java.sql.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -43,5 +40,10 @@ public class Student {
     @ManyToMany(mappedBy = "students")
     @ToString.Exclude
     private Set<Course> courses;
+
+    public Student(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
 }
