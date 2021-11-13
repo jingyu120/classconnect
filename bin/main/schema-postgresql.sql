@@ -1,8 +1,8 @@
 drop table if exists student_course;
 
 DROP TABLE IF EXISTS students;
-
 DROP TABLE IF EXISTS courses;
+
 
 CREATE TABLE courses (
     id serial PRIMARY KEY,
@@ -19,7 +19,5 @@ CREATE TABLE students (
     email VARCHAR(50),
     admitted_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     major VARCHAR(50),
-    minor VARCHAR(50),
-    course_id int,
-    FOREIGN KEY (course_id) REFERENCES courses(id)
+    minor VARCHAR(50)
 );
