@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Document(collection = "UserProfile")
 public class UserProfile {
     @Id
-    private String userID;
+    private String id;
     private String name;
     private String email;
     private String address;
