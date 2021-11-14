@@ -4,10 +4,7 @@ import depaul.csc452.group2.campusconnect.model.Student;
 import depaul.csc452.group2.campusconnect.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-<<<<<<< HEAD
-=======
 import org.springframework.ui.Model;
->>>>>>> 07c43f91261e255dcfa8979120044080c321a15a
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
