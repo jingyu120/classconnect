@@ -27,6 +27,7 @@
                 <th class="th-sm">Name</th>
                 <th class="th-sm">Email</th>
                 <th class="th-sm">Major</th>
+                <th class="th-sm"> Action</th>
               </tr>
             </thead>
             <tbody>
@@ -34,6 +35,10 @@
                 <td th:text="${student.name}"></td>
                 <td th:text="${student.email}"></td>
                 <td th:text="${student.major}"></td>
+                <td>
+                  <a th:href="@{/students/update/{id}(id=${student.id})}" class="btn btn-primary">Edit</a>
+                  <a th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-danger">Delete</a>
+                </td>
               </tr>
             </tbody>
           </table>
