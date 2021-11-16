@@ -20,7 +20,6 @@
       <table class="table text-center">
         <thead>
           <tr>
-            <th>CID</th>
             <th>Course Identifier</th>
             <th>Name</th>
             <th>Description</th>
@@ -31,7 +30,6 @@
         </thead>
         <tbody>
           <tr th:each="course : ${courses}">
-            <td th:text="${course.id}"></td>
             <td th:text="${course.dept}+${course.num}"></td>
             <td th:text="${course.name}"></td>
             <td th:text="${course.descrip}"></td>

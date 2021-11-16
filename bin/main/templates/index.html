@@ -41,16 +41,19 @@
             <h1>Welcome to ClassConnect</h1>
             <span sec:authentication="principal.username"> User</span>
         </div>
+        <br>
         <div class="row">
             <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                 <thead>
                     <tr>
+                        <th class="th-sm">Course Identifier</th>
                         <th class="th-sm">Enrolled Courses</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="course : ${courses}">
+                        <td th:text="${course.dept + course.num}"></td>
                         <td th:text="${course.name}"></td>
                     </tr>
                 </tbody>

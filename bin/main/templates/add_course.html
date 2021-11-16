@@ -18,19 +18,16 @@
                 <form action="#" th:action="@{/courses}" th:object="${course}" method="post">
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="name" class="col-form-label">Name</label>
+                            <label for="name" class="col-form-label">Course Name</label>
                             <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name">
                             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
-                            <label for="dept" class="col-form-label">Department</label>
+                            <label for="dept" class="col-form-label">Department Acronym</label>
                             <input type="text" th:field="*{dept}" class="form-control" id="dept"
                                 placeholder="Department">
                             <span th:if="${#fields.hasErrors('dept')}" th:errors="*{dept}" class="text-danger"></span>
-                            <label for="num" class="col-form-label">Number</label>
+                            <label for="num" class="col-form-label">Course Number</label>
                             <input type="text" th:field="*{num}" class="form-control" id="num" placeholder="Number">
                             <span th:if="${#fields.hasErrors('num')}" th:errors="*{num}" class="text-danger"></span>
-                            <label for="name" class="col-form-label">Name</label>
-                            <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name">
-                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
                             <label for="descrip" class="col-form-label">Description</label>
                             <input type="text" th:field="*{descrip}" class="form-control" id="descrip"
                                 placeholder="Description">
