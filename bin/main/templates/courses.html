@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 </html>
 
@@ -24,8 +24,9 @@
             <th>Course Identifier</th>
             <th>Name</th>
             <th>Description</th>
-            <!-- <th>Enrolled</th> -->
             <th>Register</th>
+            <th sec:authorize="hasAuthority('ROLE_ADMIN')">Action</th>
+
           </tr>
         </thead>
         <tbody>
@@ -34,14 +35,17 @@
             <td th:text="${course.dept}+${course.num}"></td>
             <td th:text="${course.name}"></td>
             <td th:text="${course.descrip}"></td>
-            <!-- <td th:text="${course.students}"></td> -->
             <td>
-              <div class="btn btn-primary">Sign Up</div>
+              <a th:href="@{/courses/enroll/{id}(id=${course.id})}" class="btn btn-primary">Sign Up</a>
+            </td>
+            <td sec:authorize="hasAuthority('ROLE_ADMIN')">
+              <a th:href="@{/courses/delete/{id}(id=${course.id})}" class="btn btn-danger">Delete</a>
             </td>
           </tr>
         </tbody>
       </table>
-      <a class="btn btn-primary" type="button" href="/courses/add">Add Class</a>
+      <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="btn btn-primary" type="button" href="/courses/add">Add
+        Class</a>
     </div>
   </div>
 </body>

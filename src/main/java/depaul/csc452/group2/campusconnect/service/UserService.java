@@ -40,7 +40,7 @@ public class UserService implements UserDetailsService {
         User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
                 passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
         String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
-        Student student = new Student(name, registrationDto.getEmail());
+        Student student = new Student(name, registrationDto.getEmail(), Arrays.asList());
         studentRepository.save(student);
         return userRepository.save(user);
     }
@@ -48,7 +48,9 @@ public class UserService implements UserDetailsService {
     public User saveAdmin(UserRegistrationDto registrationDto) {
         User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
                 passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_ADMIN")));
-
+        String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
+        Student student = new Student(name, registrationDto.getEmail(), Arrays.asList());
+        studentRepository.save(student);
         return userRepository.save(user);
     }
 

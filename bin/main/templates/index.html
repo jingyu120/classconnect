@@ -37,30 +37,27 @@
     <br>
 
     <div class="container">
-        <h1>Registration and Login with Spring Boot, Spring Security,
-            Thymeleaf, Hibernate and MySQL</h1>
-        Welcome <span sec:authentication="principal.username"> User</span>
-    </div>
-
-    <div class="container-fluid">
-        <!-- <div class="row justify-content-end border">
-        <div class="col-2">
-            <button class="btn btn-light" type="button">Sign Out</button>
-            <button class="btn btn-light" type="button">User ID</button>
+        <div class="row">
+            <h1>Welcome to ClassConnect</h1>
+            <span sec:authentication="principal.username"> User</span>
         </div>
-    </div> -->
-        <!-- <div class="row p-3">
-            <div class="jumbotron">
-                <h3 style="text-align: center">Class Connect</h3>
-            </div>
-        </div> -->
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <div class="d-grid gap-3">
+        <div class="row">
+            <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th class="th-sm">Enrolled Courses</th>
 
-                </div>
-            </div>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="course : ${courses}">
+                        <td th:text="${course.name}"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
+
     </div>
 </body>
 

@@ -1,10 +1,19 @@
 package depaul.csc452.group2.campusconnect.web;
 
+import java.security.Principal;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import depaul.csc452.group2.campusconnect.model.Student;
+import depaul.csc452.group2.campusconnect.service.StudentService;
 
 @Controller
 public class MainController {
+    @Autowired
+    private StudentService studentService;
 
     @GetMapping("/login")
     public String login() {
@@ -12,7 +21,9 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String home() {
+    public String home(Model model, Principal principal) {
+        Student student = studentService.findStudentByEmail(principal.getName());
+        model.addAttribute("courses", student.getCourses());
         return "index";
     }
 }

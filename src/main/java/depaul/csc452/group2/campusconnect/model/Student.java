@@ -1,21 +1,18 @@
 package depaul.csc452.group2.campusconnect.model;
 
+import java.util.Collection;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import antlr.collections.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @Document(collection = "students")
@@ -36,9 +33,12 @@ public class Student {
 
     private String address;
 
-    public Student(String name, String email) {
+    private Collection<Course> courses;
+
+    public Student(String name, String email, Collection<Course> courses) {
         this.name = name;
         this.email = email;
+        this.courses = courses;
     }
 
 }
