@@ -1,26 +1,42 @@
 package depaul.csc452.group2.campusconnect.controller;
 
-import depaul.csc452.group2.campusconnect.model.UserProfile;
-import depaul.csc452.group2.campusconnect.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.time.LocalDate;
-import java.sql.Date;
+import depaul.csc452.group2.campusconnect.service.StudentService;
 
-@RestController
+import java.security.Principal;
 
+@Controller
+@RequestMapping(path = "/profile")
 public class ProfileController {
     @Autowired
-    private IStudentService studentService;
+    private StudentService studentService;
+    // private StudentService studentService;
 
-    @GetMapping("profile")
-    public ModelAndView showStudents() {
-        ModelAndView mv = new ModelAndView("profile");
-        UserProfile profile = new UserProfile("jingyu120", "Justin Zhang", "jingyu120@gmail.com", "1407 w huron st", "Vanessa", "2485508348", "male", Date.valueOf(LocalDate.now()));
-        mv.addObject("user", profile);
-        return mv;
+    // public ProfileController(StudentService studentService) {
+    // this.studentService = studentService;
+    // }
+
+    // @GetMapping
+    // public ModelAndView showCourses() {
+    // ModelAndView mv = new ModelAndView("courses");
+    // mv.addObject("courses", courseService.findAll());
+    // return mv;
+    // }
+    @GetMapping
+    public String showStudents(Model model, Principal principal) {
+        String userEmail = principal.getName();
+        model.addAttribute("user", studentService.findStudentByEmail(userEmail));
+        model.addAttribute("userEmail", userEmail);
+
+        // UserProfile profile = new UserProfile("jingyu120", "Justin Zhang",
+        // "jingyu120@gmail.com", "1407 w huron st",
+        // "Vanessa", "2485508348", "male", Date.valueOf(LocalDate.now()));
+        // mv.addObject("user", profile);
+        return "profile";
     }
 }

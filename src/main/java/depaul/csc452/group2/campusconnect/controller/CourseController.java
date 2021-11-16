@@ -1,7 +1,7 @@
 package depaul.csc452.group2.campusconnect.controller;
 
 import depaul.csc452.group2.campusconnect.model.Course;
-import depaul.csc452.group2.campusconnect.service.ICourseService;
+import depaul.csc452.group2.campusconnect.service.CourseService;
 
 import javax.validation.Valid;
 
@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(path = "courses")
 public class CourseController {
     @Autowired
-    private ICourseService courseService;
+    private CourseService courseService;
 
     @GetMapping
     public ModelAndView showCourses() {

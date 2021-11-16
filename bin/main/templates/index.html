@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration and Login App</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <!-- create navigation bar ( header) -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" th:href="@{/}">ClassConnect Application</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/courses}">Courses</a></li>
+                    <li sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="@{/students}">View Students</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Profile</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br>
+    <br>
+
+    <div class="container">
+        <h1>Registration and Login with Spring Boot, Spring Security,
+            Thymeleaf, Hibernate and MySQL</h1>
+        Welcome <span sec:authentication="principal.username"> User</span>
+    </div>
+
+    <div class="container-fluid">
+        <!-- <div class="row justify-content-end border">
+        <div class="col-2">
+            <button class="btn btn-light" type="button">Sign Out</button>
+            <button class="btn btn-light" type="button">User ID</button>
+        </div>
+    </div> -->
+        <!-- <div class="row p-3">
+            <div class="jumbotron">
+                <h3 style="text-align: center">Class Connect</h3>
+            </div>
+        </div> -->
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="d-grid gap-3">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

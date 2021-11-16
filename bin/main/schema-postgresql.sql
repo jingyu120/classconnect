@@ -1,3 +1,4 @@
+drop table if exists student_course;
 DROP TABLE IF EXISTS students;
 DROP TABLE IF EXISTS courses;
 
@@ -15,7 +16,7 @@ CREATE TABLE students (
     usr_id VARCHAR(10),
     nm VARCHAR(50),
     email VARCHAR(50),
-    admitted_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    admitted_date VARCHAR(50),
     major VARCHAR(50),
     minor VARCHAR(50)
 );
