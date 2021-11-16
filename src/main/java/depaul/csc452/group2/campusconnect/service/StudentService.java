@@ -39,7 +39,8 @@ public class StudentService {
 
         return student;
     }
-    public Student getStudentByID(long id) {
+
+    public Student getStudentByID(String id) {
         Optional<Student> optional = studentRepository.findById(id);
         Student student = null;
         if (optional.isPresent()) {
@@ -50,7 +51,7 @@ public class StudentService {
         return student;
     }
 
-    public void deleteStudent(long id) {
+    public void deleteStudent(String id) {
         studentRepository.deleteById(id);
     }
 }

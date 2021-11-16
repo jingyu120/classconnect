@@ -36,14 +36,14 @@ public class StudentController {
     }
 
     @GetMapping("/update/{id}")
-    public String showEditStudent(@PathVariable(value = "id") long id, Model model) {
+    public String showEditStudent(@PathVariable(value = "id") String id, Model model) {
         Student student = studentService.getStudentByID(id);
         model.addAttribute("student", student);
         return "updateStudent";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteStudent(@PathVariable(value = "id") long id) {
+    public String deleteStudent(@PathVariable(value = "id") String id) {
         studentService.deleteStudent(id);
         return "redirect:/students";
     }

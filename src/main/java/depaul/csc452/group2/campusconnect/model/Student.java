@@ -11,23 +11,20 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@Entity
-@Table(name = "Students")
+@Document(collection = "students")
 @NoArgsConstructor
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
-    @Column(name = "usr_id")
-    private String userID;
-
-    @Column(name = "nm")
     private String name;
 
     @Email(message = "not valid email address format")
@@ -35,13 +32,9 @@ public class Student {
 
     private String major;
 
-    private String minor;
+    private String phone_number;
 
-    private String admittedDate;
-
-    @ManyToMany(mappedBy = "students")
-    @ToString.Exclude
-    private Set<Course> courses;
+    private String address;
 
     public Student(String name, String email) {
         this.name = name;

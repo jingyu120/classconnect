@@ -12,34 +12,34 @@
 
 <body>
     <div class="container my-5">
-        <h2 class="mb-5">Update Student</h2>
+        <h2 class="mb-5">Update Profile</h2>
         <div class="row">
             <div class="col-md-6">
-                <form th:action="@{/students}" th:object="${student}" method="post">
+                <form th:action="@{/profile}" th:object="${student}" method="post">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <input type="hidden" th:field="*{id}" />
-                            <!-- <label for=" userID" class="col-form-label">User ID</label>
-                            <input type="text" th:field="*{userID}" class="form-control" id="userID"
-                                placeholder="User ID"> -->
-
                             <label for="name" class="col-form-label">Name</label>
                             <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name">
 
                             <label for="email" class="col-form-label">Email</label>
-                            <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email"
-                                readonly>
+                            <input type="text" th:field="*{email}" class="form-control" id="email" readonly>
 
                             <label for="major" class="col-form-label">Major</label>
-                            <input type="text" th:field="*{major}" class="form-control" id="major"
-                                placeholder="Description">
+                            <input type="text" th:field="*{major}" class="form-control" id="major" placeholder="Major">
+                            <label for="phone_number" class="col-form-label">Phone Number</label>
+                            <input type="text" th:field="*{phone_number}" class="form-control" id="phone_number"
+                                placeholder="Phone Number">
+                            <label for="address" class="col-form-label">Address</label>
+                            <input type="text" th:field="*{address}" class="form-control" id="address"
+                                placeholder="Address">
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-5">
                                 <input type="submit" class="btn btn-primary" value="Save" />
                             </div>
                             <div class="col-md-6 mt-5">
-                                <a href='/students' type="button" class="btn btn-danger">Cancel</a>
+                                <a href='/profile' type="button" class="btn btn-danger">Cancel</a>
                             </div>
                         </div>
                 </form>

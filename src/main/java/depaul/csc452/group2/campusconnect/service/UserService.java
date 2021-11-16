@@ -1,7 +1,9 @@
 package depaul.csc452.group2.campusconnect.service;
 
 import depaul.csc452.group2.campusconnect.model.Role;
+import depaul.csc452.group2.campusconnect.model.Student;
 import depaul.csc452.group2.campusconnect.model.User;
+import depaul.csc452.group2.campusconnect.repo.StudentRepository;
 import depaul.csc452.group2.campusconnect.repo.UserRepository;
 import depaul.csc452.group2.campusconnect.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository) {
@@ -34,7 +39,9 @@ public class UserService implements UserDetailsService {
     public User save(UserRegistrationDto registrationDto) {
         User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
                 passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
-
+        String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
+        Student student = new Student(name, registrationDto.getEmail());
+        studentRepository.save(student);
         return userRepository.save(user);
     }
 

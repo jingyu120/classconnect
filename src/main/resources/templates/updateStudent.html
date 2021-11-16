@@ -19,26 +19,20 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <input type="hidden" th:field="*{id}" />
-                            <label for=" userID" class="col-form-label">User ID</label>
+                            <!-- <label for=" userID" class="col-form-label">User ID</label>
                             <input type="text" th:field="*{userID}" class="form-control" id="userID"
-                                placeholder="User ID">
+                                placeholder="User ID"> -->
 
                             <label for="name" class="col-form-label">Name</label>
                             <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name">
 
                             <label for="email" class="col-form-label">Email</label>
-                            <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email">
+                            <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email"
+                                readonly>
 
                             <label for="major" class="col-form-label">Major</label>
                             <input type="text" th:field="*{major}" class="form-control" id="major"
                                 placeholder="Description">
-
-                            <label for="minor" class="col-form-label">Minor</label>
-                            <input type="text" th:field="*{minor}" class="form-control" id="minor" placeholder="Minor">
-
-                            <label for="admittedDate" class="col-form-label">Admitted Date</label>
-                            <input type="text" th:field="*{admittedDate}" class="form-control" id="admittedDate"
-                                placeholder="admittedDate">
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-5">

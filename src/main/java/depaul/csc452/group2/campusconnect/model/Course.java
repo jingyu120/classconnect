@@ -29,10 +29,12 @@ public class Course {
     private String name;
     private String descrip;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "student_course", joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"))
-    @ToString.Exclude
-    private Set<Student> students;
+    // @ManyToMany(cascade = CascadeType.ALL)
+    // @JoinTable(name = "student_course", joinColumns = @JoinColumn(name =
+    // "student_id", referencedColumnName = "id"), inverseJoinColumns =
+    // @JoinColumn(name = "course_id", referencedColumnName = "id"))
+    // @ToString.Exclude
+    // private Set<Student> students;
 
     // public void addStudent(Student student) {
     // students.add(student);
