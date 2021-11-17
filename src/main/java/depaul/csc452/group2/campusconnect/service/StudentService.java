@@ -1,5 +1,6 @@
 package depaul.csc452.group2.campusconnect.service;
 
+import depaul.csc452.group2.campusconnect.model.Course;
 import depaul.csc452.group2.campusconnect.model.Student;
 import depaul.csc452.group2.campusconnect.model.User;
 import depaul.csc452.group2.campusconnect.repo.StudentRepository;
@@ -8,9 +9,12 @@ import depaul.csc452.group2.campusconnect.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -53,5 +57,15 @@ public class StudentService {
 
     public void deleteStudent(String id) {
         studentRepository.deleteById(id);
+    }
+
+    public void deleteCourseByID(long courseID, String email) {
+        Student student = studentRepository.findByEmail(email);
+        Collection<Course> courses = student.getCourses();
+        List<Course> newCourses = courses.stream().filter(course -> course.getId() != courseID)
+                .collect(Collectors.toList());
+        student.setCourses(newCourses);
+        studentRepository.save(student);
+
     }
 }

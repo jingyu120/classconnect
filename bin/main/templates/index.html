@@ -48,13 +48,14 @@
                     <tr>
                         <th class="th-sm">Course Identifier</th>
                         <th class="th-sm">Enrolled Courses</th>
-
+                        <th class="th-sm">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="course : ${courses}">
                         <td th:text="${course.dept + course.num}"></td>
                         <td th:text="${course.name}"></td>
+                        <td><a th:href="@{/delete/{id}(id=${course.id})}" class="btn btn-danger">Delete</a></td>
                     </tr>
                 </tbody>
             </table>
