@@ -29,7 +29,7 @@ public class Student {
 
     private String major;
 
-    private Gender gender;
+    private String gender;
 
     private String phone_number;
 
@@ -37,10 +37,11 @@ public class Student {
 
     private Collection<Course> courses;
 
-    public Student(String name, String email, Collection<Course> courses) {
+    public Student(String name, String email, Collection<Course> courses, String gender) {
         this.name = name;
         this.email = email;
         this.courses = courses;
+        this.gender = gender;
     }
 
 }

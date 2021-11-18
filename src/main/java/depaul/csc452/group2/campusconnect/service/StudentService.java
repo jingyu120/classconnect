@@ -34,14 +34,14 @@ public class StudentService {
     }
 
     public Student findStudentByEmail(String userEmail) {
-        Student student = studentRepository.findByEmail(userEmail);
-        if (student == null) {
-            User user = userRepository.findByEmail(userEmail);
-            String name = user.getFirstName() + " " + user.getLastName();
-            student = new Student(name, userEmail, Arrays.asList());
-        }
 
-        return student;
+//        if (student == null) {
+//            User user = userRepository.findByEmail(userEmail);
+//            String name = user.getFirstName() + " " + user.getLastName();
+//            student = new Student(name, userEmail, Arrays.asList());
+//        }
+
+        return studentRepository.findByEmail(userEmail);
     }
 
     public Student getStudentByID(String id) {
