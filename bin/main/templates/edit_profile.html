@@ -21,10 +21,16 @@
                             <input type="hidden" th:field="*{id}" />
                             <label for="name" class="col-form-label">Name</label>
                             <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name">
-
+                            <div>
+                                <label for="gender" class="col-form-label">Gender</label>
+                                <select name="gender">
+                                    <option
+                                        th:each="gender : ${T(depaul.csc452.group2.campusconnect.model.Gender).values()}"
+                                        th:value="${gender}" th:text="${gender}"></option>
+                                </select>
+                            </div>
                             <label for="email" class="col-form-label">Email</label>
                             <input type="text" th:field="*{email}" class="form-control" id="email" readonly>
-
                             <label for="major" class="col-form-label">Major</label>
                             <input type="text" th:field="*{major}" class="form-control" id="major" placeholder="Major">
                             <label for="phone_number" class="col-form-label">Phone Number</label>

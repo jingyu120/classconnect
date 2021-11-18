@@ -29,6 +29,8 @@ public class Student {
 
     private String major;
 
+    private Gender gender;
+
     private String phone_number;
 
     private String address;
