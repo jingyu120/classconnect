@@ -23,7 +23,7 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="d-flex flex-column align-items-center text-center">
-								<h6 th:if="${user.gender ==''}">Select Appropriate Gender to display Avatar</h6>
+								<h6 th:if="${user.gender =='Not Selected'}">Select gender to display Avatar</h6>
 								<img th:if="${user.gender == 'FEMALE'}"
 									src="https://bootdey.com/img/Content/avatar/avatar8.png"
 									class="rounded-circle p-1 bg-primary" width="110" />
