@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="depaul.csc452.group2.campusconnect.service.StudentServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-19T04:43:47" hostname="thanchanoks-mbp.lan" time="1.172">
-  <properties/>
-  <testcase name="throwWhenStudentNotFoundByID()" classname="depaul.csc452.group2.campusconnect.service.StudentServiceTest" time="1.172"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
