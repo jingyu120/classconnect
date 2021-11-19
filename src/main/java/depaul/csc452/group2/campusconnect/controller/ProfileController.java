@@ -18,27 +18,11 @@ import java.security.Principal;
 public class ProfileController {
     @Autowired
     private StudentService studentService;
-    // private StudentService studentService;
 
-    // public ProfileController(StudentService studentService) {
-    // this.studentService = studentService;
-    // }
-
-    // @GetMapping
-    // public ModelAndView showCourses() {
-    // ModelAndView mv = new ModelAndView("courses");
-    // mv.addObject("courses", courseService.findAll());
-    // return mv;
-    // }
     @GetMapping
     public String showStudents(Model model, Principal principal) {
         String userEmail = principal.getName();
         model.addAttribute("user", studentService.findStudentByEmail(userEmail));
-
-        // UserProfile profile = new UserProfile("jingyu120", "Justin Zhang",
-        // "jingyu120@gmail.com", "1407 w huron st",
-        // "Vanessa", "2485508348", "male", Date.valueOf(LocalDate.now()));
-        // mv.addObject("user", profile);
         return "profile";
     }
 
@@ -50,8 +34,8 @@ public class ProfileController {
     }
 
     @PostMapping
-    public String addStudent(Student student) {
-        studentService.addStudent(student);
+    public String saveStudent(Student student) {
+        studentService.saveStudent(student);
         return "redirect:/profile";
     }
 }

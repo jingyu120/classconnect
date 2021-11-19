@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping(path = "students")
 public class StudentController {
@@ -18,9 +20,11 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping
-    public ModelAndView showStudents() {
+    public ModelAndView showStudents(Principal principal) {
+        String email = principal.getName();
         ModelAndView mv = new ModelAndView("student_table");
         mv.addObject("students", studentService.getAllStudents());
+        mv.addObject("currentEmail", email);
         return mv;
     }
 

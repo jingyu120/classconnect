@@ -37,7 +37,7 @@
                         <td th:text="${student.major}"></td>
                         <td>
                             <a th:href="@{/students/update/{id}(id=${student.id})}" class="btn btn-primary">Edit</a>
-                            <a th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-danger">Delete</a>
+                            <a th:if="${currentEmail != student.getEmail()}" th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     </tbody>
