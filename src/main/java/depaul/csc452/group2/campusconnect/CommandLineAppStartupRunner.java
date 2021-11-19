@@ -16,7 +16,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     UserRepository userRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         User admin = userRepository.findByEmail("admin@gmail.com");
         if (admin == null) {
             UserRegistrationDto dto = new UserRegistrationDto("admin", "admin", "admin@gmail.com", "password");

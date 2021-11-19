@@ -1,5 +1,6 @@
 package depaul.csc452.group2.campusconnect.service;
 
+import depaul.csc452.group2.campusconnect.exceptions.UserAlreadyExistException;
 import depaul.csc452.group2.campusconnect.model.Role;
 import depaul.csc452.group2.campusconnect.model.Student;
 import depaul.csc452.group2.campusconnect.model.User;
@@ -30,12 +31,12 @@ public class UserService implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-//    public UserService(UserRepository userRepository) {
-//        super();
-//        this.userRepository = userRepository;
-//    }
 
     public User save(UserRegistrationDto registrationDto) {
+        User existUser = userRepository.findByEmail(registrationDto.getEmail());
+        if (existUser != null) {
+            throw new UserAlreadyExistException("User already exist with email: ");
+        }
         User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
                 passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
         String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
@@ -45,6 +46,10 @@ public class UserService implements UserDetailsService {
     }
 
     public User saveAdmin(UserRegistrationDto registrationDto) {
+        User existUser = userRepository.findByEmail(registrationDto.getEmail());
+        if (existUser != null) {
+            throw new UserAlreadyExistException("User already exist with email: ");
+        }
         User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
                 passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_ADMIN")));
         String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
