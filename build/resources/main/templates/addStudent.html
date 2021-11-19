@@ -27,6 +27,14 @@
                             <label for="major" class="col-form-label">Major</label>
                             <input type="text" th:field="*{major}" class="form-control" id="major"
                                 placeholder="Description">
+                            <div>
+                                <label class="col-form-label">Gender</label>
+                                <select name="gender">
+                                    <option
+                                            th:each="gender : ${T(depaul.csc452.group2.campusconnect.model.Gender).values()}"
+                                            th:value="${gender}" th:text="${gender}"></option>
+                                </select>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-5">

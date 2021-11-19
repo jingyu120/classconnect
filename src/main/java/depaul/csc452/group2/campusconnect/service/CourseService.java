@@ -22,9 +22,8 @@ public class CourseService {
 
     }
 
-    public Course update(Course course) {
+    public void update(Course course) {
         courseRepository.save(course);
-        return course;
 
     }
 

@@ -67,7 +67,7 @@ public class CourseController {
 
         if (!courses.contains(course)) {
             student.getCourses().add(course);
-            studentService.addStudent(student);
+            studentService.saveStudent(student);
         }
         return "redirect:/courses";
     }

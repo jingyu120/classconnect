@@ -20,7 +20,7 @@ public class StudentController {
     @GetMapping
     public ModelAndView showStudents() {
         ModelAndView mv = new ModelAndView("student_table");
-        mv.addObject("students", studentService.findAll());
+        mv.addObject("students", studentService.getAllStudents());
         return mv;
     }
 
@@ -29,9 +29,15 @@ public class StudentController {
         return "addStudent";
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public String addStudent(Student student) {
         studentService.addStudent(student);
+        return "redirect:/students";
+    }
+
+    @PostMapping("/update")
+    public String saveStudent(Student student) {
+        studentService.saveStudent(student);
         return "redirect:/students";
     }
 

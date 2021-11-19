@@ -1,11 +1,14 @@
 package depaul.csc452.group2.campusconnect.service;
 
+import depaul.csc452.group2.campusconnect.exceptions.BadRequestException;
+import depaul.csc452.group2.campusconnect.exceptions.StudentNotFoundException;
 import depaul.csc452.group2.campusconnect.model.Course;
 import depaul.csc452.group2.campusconnect.model.Student;
 import depaul.csc452.group2.campusconnect.model.User;
 import depaul.csc452.group2.campusconnect.repo.StudentRepository;
 import depaul.csc452.group2.campusconnect.repo.UserRepository;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,31 +19,30 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @Service
 public class StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    public List<Student> findAll() {
+    public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
+    public void saveStudent(Student student) {
+        studentRepository.save(student);
+    }
     public void addStudent(Student student) {
+        String email = student.getEmail();
+        Boolean existsEmail = studentRepository.existsByEmail(email);
+        if (existsEmail) {
+            throw new BadRequestException("Email " + email + " is taken.");
+        }
         studentRepository.save(student);
     }
 
     public Student findStudentByEmail(String userEmail) {
-
-//        if (student == null) {
-//            User user = userRepository.findByEmail(userEmail);
-//            String name = user.getFirstName() + " " + user.getLastName();
-//            student = new Student(name, userEmail, Arrays.asList());
-//        }
-
         return studentRepository.findByEmail(userEmail);
     }
 
@@ -50,12 +52,16 @@ public class StudentService {
         if (optional.isPresent()) {
             student = optional.get();
         } else {
-            throw new RuntimeException("Student not found for ID:" + id);
+            throw new StudentNotFoundException("Student not found for ID:" + id);
         }
         return student;
     }
 
     public void deleteStudent(String id) {
+        if (!studentRepository.existsById(id)) {
+            throw new StudentNotFoundException(
+                    "Student with id " + id + " does not exists");
+        }
         studentRepository.deleteById(id);
     }
 

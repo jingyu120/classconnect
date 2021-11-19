@@ -22,19 +22,18 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements UserDetailsService {
 
+
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private StudentRepository studentRepository;
-
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
-        super();
-        this.userRepository = userRepository;
-    }
+//    public UserService(UserRepository userRepository) {
+//        super();
+//        this.userRepository = userRepository;
+//    }
 
     public User save(UserRegistrationDto registrationDto) {
         User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
