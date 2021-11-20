@@ -57,7 +57,7 @@ class UserServiceTest {
         User user = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(),
                 passwordEncoder.encode(dto.getPassword()), List.of(new Role("ROLE_USER")));
 
-        userService.save(dto);
+        userService.save(dto, "ROLE_USER");
         ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
         verify(userRepository).save(userArgumentCaptor.capture());
         User capturedUser = userArgumentCaptor.getValue();
@@ -80,23 +80,12 @@ class UserServiceTest {
         try {
             UserRegistrationDto dto = new UserRegistrationDto("Justin", "Zhang", email, "password");
             given(userRepository.existsByEmail(email)).willReturn(true);
-            userService.save(dto);
+            userService.save(dto, "ROLE_USER");
         } catch (UserAlreadyExistException e) {
             assertEquals(e.getMessage(), "User already exist with email: " + email);
         }
     }
 
-    @Test
-    void throwWhenAdminEmailDoesNotExist() {
-        String email = "jingyu120@gmail.com";
-        try {
-            UserRegistrationDto dto = new UserRegistrationDto("Justin", "Zhang", email, "password");
-            given(userRepository.existsByEmail(email)).willReturn(true);
-            userService.saveAdmin(dto);
-        } catch (UserAlreadyExistException e) {
-            assertEquals(e.getMessage(), "User already exist with email: " + email);
-        }
-    }
 
     @Test
     void checkLoadUserByUsername() {

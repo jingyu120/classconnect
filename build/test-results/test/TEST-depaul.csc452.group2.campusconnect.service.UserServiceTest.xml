@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="depaul.csc452.group2.campusconnect.service.UserServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-20T01:00:49" hostname="thanchanoks-mbp.lan" time="1.596">
+<testsuite name="depaul.csc452.group2.campusconnect.service.UserServiceTest" tests="5" skipped="1" failures="0" errors="0" timestamp="2021-11-20T01:11:39" hostname="thanchanoks-mbp.lan" time="1.796">
   <properties/>
-  <testcase name="checkLoadUserByUsername()" classname="depaul.csc452.group2.campusconnect.service.UserServiceTest" time="1.596"/>
+  <testcase name="throwWhenEmailDoesNotExist()" classname="depaul.csc452.group2.campusconnect.service.UserServiceTest" time="1.759"/>
+  <testcase name="throwWhenUserDoesNotExist()" classname="depaul.csc452.group2.campusconnect.service.UserServiceTest" time="0.008"/>
+  <testcase name="checkLoadUserByUsername()" classname="depaul.csc452.group2.campusconnect.service.UserServiceTest" time="0.016"/>
+  <testcase name="canSaveUser()" classname="depaul.csc452.group2.campusconnect.service.UserServiceTest" time="0.001">
+    <skipped/>
+  </testcase>
+  <testcase name="checkMapRolesToAuthorities()" classname="depaul.csc452.group2.campusconnect.service.UserServiceTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

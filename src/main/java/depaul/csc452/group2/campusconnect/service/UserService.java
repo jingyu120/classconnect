@@ -33,31 +33,19 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public void save(UserRegistrationDto registrationDto) {
+    public void save(UserRegistrationDto registrationDto, String role) {
         Boolean existUser = userRepository.existsByEmail(registrationDto.getEmail());
         if (existUser) {
             throw new UserAlreadyExistException("User already exist with email: " + registrationDto.getEmail());
         }
         User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
-                passwordEncoder.encode(registrationDto.getPassword()), List.of(new Role("ROLE_USER")));
+                passwordEncoder.encode(registrationDto.getPassword()), List.of(new Role(role)));
         String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
         Student student = new Student(name, registrationDto.getEmail(), List.of(), "Not Selected");
         studentRepository.save(student);
         userRepository.save(user);
     }
 
-    public void saveAdmin(UserRegistrationDto registrationDto) {
-        Boolean existUser = userRepository.existsByEmail(registrationDto.getEmail());
-        if (existUser) {
-            throw new UserAlreadyExistException("User already exist with email: " + registrationDto.getEmail());
-        }
-        User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
-                passwordEncoder.encode(registrationDto.getPassword()), List.of(new Role("ROLE_ADMIN")));
-        String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
-        Student student = new Student(name, registrationDto.getEmail(), List.of(), "Not Selected");
-        studentRepository.save(student);
-        userRepository.save(user);
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
