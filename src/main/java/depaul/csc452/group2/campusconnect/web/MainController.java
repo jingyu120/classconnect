@@ -1,4 +1,4 @@
-package depaul.csc452.group2.campusconnect.controller;
+package depaul.csc452.group2.campusconnect.web;
 
 import java.security.Principal;
 

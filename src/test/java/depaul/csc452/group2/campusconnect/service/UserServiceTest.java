@@ -45,7 +45,6 @@ class UserServiceTest {
     void setup() {
         userService = new UserService(userRepository);
         passwordEncoder = new BCryptPasswordEncoder();
-
     }
 
     @Test
@@ -53,25 +52,18 @@ class UserServiceTest {
     void canSaveUser() {
         String email = "jingyu120@gmail.com";
         UserRegistrationDto dto = new UserRegistrationDto("Justin", "Zhang", email, "password");
-        given(userRepository.existsByEmail(email)).willReturn(false);
         User user = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(),
                 passwordEncoder.encode(dto.getPassword()), List.of(new Role("ROLE_USER")));
 
+        given(userRepository.existsByEmail(email)).willReturn(false);
+
+//        when(new User(anyString(), anyString(), anyString(),anyString(), any())).thenReturn(user);
+//
         userService.save(dto, "ROLE_USER");
         ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
         verify(userRepository).save(userArgumentCaptor.capture());
         User capturedUser = userArgumentCaptor.getValue();
         assertEquals(capturedUser, user);
-
-
-//
-//        User user = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(),
-//                passwordEncoder.encode(dto.getPassword()), List.of(new Role("ROLE_USER")));
-//        String name = dto.getFirstName() + " " + dto.getLastName();
-//        Student student = new Student(name, dto.getEmail(), List.of(), "Not Selected");
-//        userService.save(dto);
-//        verify(studentRepository).save(student);
-//        verify(userRepository).save(user);
     }
 
     @Test
