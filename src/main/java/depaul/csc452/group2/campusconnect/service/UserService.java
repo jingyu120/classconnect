@@ -16,46 +16,47 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
-
-
-    @Autowired
     private UserRepository userRepository;
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-
-    public User save(UserRegistrationDto registrationDto) {
-        User existUser = userRepository.findByEmail(registrationDto.getEmail());
-        if (existUser != null) {
-            throw new UserAlreadyExistException("User already exist with email: ");
-        }
-        User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
-                passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
-        String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
-        Student student = new Student(name, registrationDto.getEmail(), Arrays.asList(), "Not Selected");
-        studentRepository.save(student);
-        return userRepository.save(user);
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public User saveAdmin(UserRegistrationDto registrationDto) {
-        User existUser = userRepository.findByEmail(registrationDto.getEmail());
-        if (existUser != null) {
-            throw new UserAlreadyExistException("User already exist with email: ");
+
+    public void save(UserRegistrationDto registrationDto) {
+        Boolean existUser = userRepository.existsByEmail(registrationDto.getEmail());
+        if (existUser) {
+            throw new UserAlreadyExistException("User already exist with email: " + registrationDto.getEmail());
         }
         User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
-                passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_ADMIN")));
+                passwordEncoder.encode(registrationDto.getPassword()), List.of(new Role("ROLE_USER")));
         String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
-        Student student = new Student(name, registrationDto.getEmail(), Arrays.asList(),"Not Selected");
+        Student student = new Student(name, registrationDto.getEmail(), List.of(), "Not Selected");
         studentRepository.save(student);
-        return userRepository.save(user);
+        userRepository.save(user);
+    }
+
+    public void saveAdmin(UserRegistrationDto registrationDto) {
+        Boolean existUser = userRepository.existsByEmail(registrationDto.getEmail());
+        if (existUser) {
+            throw new UserAlreadyExistException("User already exist with email: " + registrationDto.getEmail());
+        }
+        User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
+                passwordEncoder.encode(registrationDto.getPassword()), List.of(new Role("ROLE_ADMIN")));
+        String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
+        Student student = new Student(name, registrationDto.getEmail(), List.of(),"Not Selected");
+        studentRepository.save(student);
+        userRepository.save(user);
     }
 
     @Override

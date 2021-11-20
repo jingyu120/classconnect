@@ -1,11 +1,9 @@
 package depaul.csc452.group2.campusconnect.service;
 
 import depaul.csc452.group2.campusconnect.exceptions.CourseNotFoundException;
-import depaul.csc452.group2.campusconnect.exceptions.StudentNotFoundException;
 import depaul.csc452.group2.campusconnect.model.Course;
 import depaul.csc452.group2.campusconnect.repo.CourseRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -35,10 +33,6 @@ class CourseServiceTest {
         verify(courseRepository).findAll();
     }
 
-    @Test
-    @Disabled
-    void addCourse() {
-    }
 
     @Test
     void update() {
