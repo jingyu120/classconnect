@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -29,12 +30,14 @@ public class Student {
 
     private String major;
 
+    @NotNull(message = "gender cannot be null")
     private String gender;
 
     private String phone_number;
 
     private String address;
 
+    @NotNull(message = "courses cannot be null")
     private Collection<Course> courses;
 
     public Student(String name, String email, Collection<Course> courses, String gender) {

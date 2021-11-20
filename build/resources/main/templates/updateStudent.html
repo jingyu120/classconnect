@@ -19,20 +19,24 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <input type="hidden" th:field="*{id}" />
-                            <!-- <label for=" userID" class="col-form-label">User ID</label>
-                            <input type="text" th:field="*{userID}" class="form-control" id="userID"
-                                placeholder="User ID"> -->
-
+                            <input type="hidden" th:field="*{courses}" />
                             <label for="name" class="col-form-label">Name</label>
                             <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name">
-
                             <label for="email" class="col-form-label">Email</label>
                             <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email"
                                 readonly>
-
+                            <div>
+                                <label class="col-form-label">Gender</label>
+                                <select name="gender">
+                                    <option
+                                            th:each="gender : ${T(depaul.csc452.group2.campusconnect.model.Gender).values()}"
+                                            th:value="${gender}" th:text="${gender}"></option>
+                                </select>
+                            </div>
                             <label for="major" class="col-form-label">Major</label>
                             <input type="text" th:field="*{major}" class="form-control" id="major"
                                 placeholder="Description">
+
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-5">

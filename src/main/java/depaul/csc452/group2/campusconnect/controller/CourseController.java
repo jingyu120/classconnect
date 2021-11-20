@@ -7,6 +7,7 @@ import depaul.csc452.group2.campusconnect.service.StudentService;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -64,7 +65,6 @@ public class CourseController {
         Student student = studentService.findStudentByEmail(email);
         Course course = courseService.findCourseByID(id);
         Collection<Course> courses = student.getCourses();
-
         if (!courses.contains(course)) {
             courses.add(course);
             studentService.saveStudent(student);
