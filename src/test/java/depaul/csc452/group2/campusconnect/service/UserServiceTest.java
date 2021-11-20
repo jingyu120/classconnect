@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
@@ -70,6 +71,7 @@ class UserServiceTest {
             UserRegistrationDto dto = new UserRegistrationDto("Justin", "Zhang", email, "password");
             given(userRepository.existsByEmail(email)).willReturn(true);
             userService.save(dto, "ROLE_USER");
+            fail("exception should have been thrown");
         } catch (UserAlreadyExistException e) {
             assertEquals(e.getMessage(), "User already exist with email: " + email);
         }
@@ -94,6 +96,7 @@ class UserServiceTest {
         try {
             given(userRepository.findByEmail(userName)).willReturn(null);
             userService.loadUserByUsername(userName);
+            fail("exception should have been thrown");
         }catch (UsernameNotFoundException e) {
             assertEquals(e.getMessage(), "Invalid username or password.");
         }
