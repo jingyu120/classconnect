@@ -14,10 +14,15 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
@@ -94,6 +99,18 @@ class UserServiceTest {
     }
 
     @Test
+    void checkLoadUserByUsername() {
+        String userName = "jingyu120@gmail.com";
+        User user = new User("Justin", "Zhang", userName, "password", List.of(new Role("ROLE_ADMIN")));
+        given(userRepository.findByEmail(userName)).willReturn(user);
+        UserDetails expectedDetail = new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
+                userService.mapRolesToAuthorities(user.getRoles()));
+        UserDetails userDetails = userService.loadUserByUsername(userName);
+        assertEquals(expectedDetail, userDetails);
+
+    }
+
+    @Test
     void throwWhenUserDoesNotExist() {
         String userName = "jingyu120@gmail.com";
         try {
@@ -102,14 +119,18 @@ class UserServiceTest {
         }catch (UsernameNotFoundException e) {
             assertEquals(e.getMessage(), "Invalid username or password.");
         }
-
     }
 
     @Test
-    void saveAdmin() {
+    void checkMapRolesToAuthorities() {
+        Collection<Role> roles = List.of(new Role("ROLE_ADMIN"));
+        Collection<? extends GrantedAuthority> expected = roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+        Collection<? extends GrantedAuthority> grantedAuthorities = userService.mapRolesToAuthorities(roles);
+        assertEquals(grantedAuthorities, expected);
+
     }
 
-    @Test
-    void loadUserByUsername() {
-    }
+
+
+
 }

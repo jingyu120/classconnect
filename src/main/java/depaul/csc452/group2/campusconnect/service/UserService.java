@@ -54,7 +54,7 @@ public class UserService implements UserDetailsService {
         User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
                 passwordEncoder.encode(registrationDto.getPassword()), List.of(new Role("ROLE_ADMIN")));
         String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
-        Student student = new Student(name, registrationDto.getEmail(), List.of(),"Not Selected");
+        Student student = new Student(name, registrationDto.getEmail(), List.of(), "Not Selected");
         studentRepository.save(student);
         userRepository.save(user);
     }
@@ -70,7 +70,7 @@ public class UserService implements UserDetailsService {
                 mapRolesToAuthorities(user.getRoles()));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+    public Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
