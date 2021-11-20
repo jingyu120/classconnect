@@ -32,28 +32,15 @@ public class UserService implements UserDetailsService {
     private BCryptPasswordEncoder passwordEncoder;
 
 
-    public User save(UserRegistrationDto registrationDto) {
+    public User save(UserRegistrationDto registrationDto, String role) {
         User existUser = userRepository.findByEmail(registrationDto.getEmail());
         if (existUser != null) {
             throw new UserAlreadyExistException("User already exist with email: ");
         }
         User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
-                passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
+                passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role(role)));
         String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
-        Student student = new Student(name, registrationDto.getEmail(), Arrays.asList(), "Not Selected");
-        studentRepository.save(student);
-        return userRepository.save(user);
-    }
-
-    public User saveAdmin(UserRegistrationDto registrationDto) {
-        User existUser = userRepository.findByEmail(registrationDto.getEmail());
-        if (existUser != null) {
-            throw new UserAlreadyExistException("User already exist with email: ");
-        }
-        User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
-                passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_ADMIN")));
-        String name = registrationDto.getFirstName() + " " + registrationDto.getLastName();
-        Student student = new Student(name, registrationDto.getEmail(), Arrays.asList(),"Not Selected");
+        Student student = new Student(name, registrationDto.getEmail(), Arrays.asList(), role);
         studentRepository.save(student);
         return userRepository.save(user);
     }

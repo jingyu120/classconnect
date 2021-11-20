@@ -20,13 +20,13 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         User admin = userRepository.findByEmail("admin@gmail.com");
         if (admin == null) {
             UserRegistrationDto dto = new UserRegistrationDto("admin", "admin", "admin@gmail.com", "password");
-            userService.saveAdmin(dto);
+            userService.save(dto, "ROLE_ADMIN");
         }
         User user = userRepository.findByEmail("user@gmail.com");
         if (user == null) {
             UserRegistrationDto dto2 = new UserRegistrationDto("userFirstName", "userLastName", "user@gmail.com",
                     "password");
-            userService.save(dto2);
+            userService.save(dto2, "ROLE_USER");
         }
     }
 }

@@ -31,7 +31,7 @@ public class UserRegistrationController {
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {
-        userService.save(registrationDto);
+        userService.save(registrationDto, "ROLE_USER");
         return "redirect:/registration?success";
     }
 }
