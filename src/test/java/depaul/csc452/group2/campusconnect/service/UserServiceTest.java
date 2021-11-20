@@ -35,9 +35,6 @@ class UserServiceTest {
     @Mock
     private StudentRepository studentRepository;
 
-    @Mock
-    private User user;
-
     private UserService userService;
     private BCryptPasswordEncoder passwordEncoder;
 
